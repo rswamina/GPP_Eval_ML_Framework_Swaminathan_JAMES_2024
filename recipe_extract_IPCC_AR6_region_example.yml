@@ -1,0 +1,415 @@
+#recipe_extract_IPCC_AR6_regions.yml
+
+---
+documentation:
+  description: |
+    Extracting IPCC regions
+  title: Extract IPCC-AR6 regions
+
+  authors:
+    - swaminathan_ranjini
+
+#  references:
+#    - collins13ipcc
+
+  projects:
+    - ukesm 
+
+preprocessors:
+  preproc_extract_region_land_annual:
+    extract_shape:
+      shapefile : IPCC-AR6-shapefiles/IPCC-WGI-reference-regions-v4.shp
+      decomposed : False
+      method : contains
+      crop: True
+      ids: 
+        - 'Sahara'
+    mask_landsea:
+      mask_out : sea
+    annual_statistics:
+      operator: mean
+
+  preproc_extract_region_land_djf:
+    extract_shape:
+      shapefile : IPCC-AR6-shapefiles/IPCC-WGI-reference-regions-v4.shp
+      decomposed : False
+      method : contains
+      crop: True
+      ids: 
+        - 'Sahara'
+    mask_landsea:
+      mask_out: sea
+    extract_season:
+      season: djf
+    seasonal_statistics: 
+      operator: mean
+
+  preproc_extract_region_land_jja:
+    extract_shape:
+      shapefile : IPCC-AR6-shapefiles/IPCC-WGI-reference-regions-v4.shp
+      decomposed : False
+      method : contains
+      crop: True
+      ids: 
+        - 'Sahara'
+    mask_landsea:
+      mask_out: sea
+    extract_season:
+      season: jja
+    seasonal_statistics: 
+      operator: mean
+
+
+datasets:
+  - {dataset: UKESM1-0-LL, exp: piControl, start_year: 1960, end_year: 3059, grid: gn, ensemble: r1i1p1f2 }
+  - {dataset: IPSL-CM6A-LR, exp: piControl, start_year: 1850, end_year: 3049, grid: gr, ensemble: r1i1p1f1 }
+#  - {dataset: BCC-ESM1, exp: piControl, start_year: 1850, end_year: 2300, grid: gn, ensemble: r1i1p1f1 }
+#  - {dataset: CESM2, exp: piControl, start_year: 0001, end_year: 1200, grid: gn, ensemble: r1i1p1f1 }
+  - {dataset: GISS-E2-1-G, exp: piControl, start_year: 4150, end_year: 5000, grid: gn, ensemble: r1i1p1f1 }
+  - {dataset: CNRM-ESM2-1, exp: piControl, start_year: 1850, end_year: 2349, grid: gr, ensemble: r1i1p1f2 }
+  - {dataset: CanESM5, exp: piControl, start_year: 5201, end_year: 6200, grid: gn, ensemble: r1i1p1f1 }
+
+
+diagnostics:
+  annual_means_tas:
+    description: calculate annual means for region
+    variables:
+      tas:
+        preprocessor: preproc_extract_region_land_annual
+        project: CMIP6
+        mip: Amon
+    scripts: 
+      annual_means: 
+        script: /home/users/ranjinis/projects/src/github-project-repos/ml-vegetation-response/diag_scripts/name_IPCC_region_files.py
+        base_output_dir: /gws/nopw/j04/ukesm_nceo/ranjinis/gpp-eval-ml/pi-ctrl/land-only-regional/
+        season: annual
+        region: SAH
+
+
+  annual_means_pr:
+    description: calculate annual means for region
+    variables:
+      pr:
+        preprocessor: preproc_extract_region_land_annual
+        project: CMIP6
+        mip: Amon
+    scripts: 
+      annual_means: 
+        script: /home/users/ranjinis/projects/src/github-project-repos/ml-vegetation-response/diag_scripts/name_IPCC_region_files.py
+        base_output_dir: /gws/nopw/j04/ukesm_nceo/ranjinis/gpp-eval-ml/pi-ctrl/land-only-regional/
+        season: annual
+        region: SAH
+
+  annual_means_hurs:
+    description: calculate annual means for region
+    variables:
+      hurs:
+        preprocessor: preproc_extract_region_land_annual
+        project: CMIP6
+        mip: Amon
+    scripts: 
+      annual_means: 
+        script: /home/users/ranjinis/projects/src/github-project-repos/ml-vegetation-response/diag_scripts/name_IPCC_region_files.py
+        base_output_dir: /gws/nopw/j04/ukesm_nceo/ranjinis/gpp-eval-ml/pi-ctrl/land-only-regional/
+        season: annual
+        region: SAH
+
+  annual_means_gpp:
+    description: calculate annual means for region
+    variables:
+      gpp:
+        preprocessor: preproc_extract_region_land_annual
+        project: CMIP6
+        mip: Lmon
+    scripts: 
+      annual_means: 
+        script: /home/users/ranjinis/projects/src/github-project-repos/ml-vegetation-response/diag_scripts/name_IPCC_region_files.py
+        base_output_dir: /gws/nopw/j04/ukesm_nceo/ranjinis/gpp-eval-ml/pi-ctrl/land-only-regional/
+        season: annual
+        region: SAH
+
+  annual_means_tasmax:
+    description: calculate annual means for region
+    variables:
+      tasmax:
+        preprocessor: preproc_extract_region_land_annual
+        project: CMIP6
+        mip: Amon
+    scripts: 
+      annual_means: 
+        script: /home/users/ranjinis/projects/src/github-project-repos/ml-vegetation-response/diag_scripts/name_IPCC_region_files.py
+        base_output_dir: /gws/nopw/j04/ukesm_nceo/ranjinis/gpp-eval-ml/pi-ctrl/land-only-regional/
+        season: annual
+        region: SAH
+
+  annual_means_tasmin:
+    description: calculate annual means for region
+    variables:
+      tasmin:
+        preprocessor: preproc_extract_region_land_annual
+        project: CMIP6
+        mip: Amon
+    scripts: 
+      annual_means: 
+        script: /home/users/ranjinis/projects/src/github-project-repos/ml-vegetation-response/diag_scripts/name_IPCC_region_files.py
+        base_output_dir: /gws/nopw/j04/ukesm_nceo/ranjinis/gpp-eval-ml/pi-ctrl/land-only-regional/
+        season: annual
+        region: SAH
+
+  annual_means_rsds:
+    description: calculate annual means for region
+    variables:
+      rsds:
+        preprocessor: preproc_extract_region_land_annual
+        project: CMIP6
+        mip: Amon
+    scripts: 
+      annual_means: 
+        script: /home/users/ranjinis/projects/src/github-project-repos/ml-vegetation-response/diag_scripts/name_IPCC_region_files.py
+        base_output_dir: /gws/nopw/j04/ukesm_nceo/ranjinis/gpp-eval-ml/pi-ctrl/land-only-regional/
+        season: annual
+        region: SAH
+
+  annual_means_sm:
+    description: calculate annual means for region
+    variables:
+      sm:
+        preprocessor: preproc_extract_region_land_annual
+        project: CMIP6
+        mip: Lmon
+        derive: true
+    scripts: 
+      annual_means: 
+        script: /home/users/ranjinis/projects/src/github-project-repos/ml-vegetation-response/diag_scripts/name_IPCC_region_files.py
+        base_output_dir: /gws/nopw/j04/ukesm_nceo/ranjinis/gpp-eval-ml/pi-ctrl/land-only-regional/
+        season: annual
+        region: SAH
+
+
+  djf_means_tas:
+    description: calculate djf means for region
+    variables:
+      tas:
+        preprocessor: preproc_extract_region_land_djf
+        project: CMIP6
+        mip: Amon
+    scripts: 
+      djf_means: 
+        script: /home/users/ranjinis/projects/src/github-project-repos/ml-vegetation-response/diag_scripts/name_IPCC_region_files.py
+        base_output_dir: /gws/nopw/j04/ukesm_nceo/ranjinis/gpp-eval-ml/pi-ctrl/land-only-regional/
+        season: djf
+        region: SAH
+
+
+  djf_means_pr:
+    description: calculate djf means for region
+    variables:
+      pr:
+        preprocessor: preproc_extract_region_land_djf
+        project: CMIP6
+        mip: Amon
+    scripts: 
+      djf_means: 
+        script: /home/users/ranjinis/projects/src/github-project-repos/ml-vegetation-response/diag_scripts/name_IPCC_region_files.py
+        base_output_dir: /gws/nopw/j04/ukesm_nceo/ranjinis/gpp-eval-ml/pi-ctrl/land-only-regional/
+        season: djf
+        region: SAH
+
+  djf_means_hurs:
+    description: calculate djf means for region
+    variables:
+      hurs:
+        preprocessor: preproc_extract_region_land_djf
+        project: CMIP6
+        mip: Amon
+    scripts: 
+      djf_means: 
+        script: /home/users/ranjinis/projects/src/github-project-repos/ml-vegetation-response/diag_scripts/name_IPCC_region_files.py
+        base_output_dir: /gws/nopw/j04/ukesm_nceo/ranjinis/gpp-eval-ml/pi-ctrl/land-only-regional/
+        season: djf
+        region: SAH
+
+  djf_means_gpp:
+    description: calculate djf means for region
+    variables:
+      gpp:
+        preprocessor: preproc_extract_region_land_djf
+        project: CMIP6
+        mip: Lmon
+    scripts: 
+      djf_means: 
+        script: /home/users/ranjinis/projects/src/github-project-repos/ml-vegetation-response/diag_scripts/name_IPCC_region_files.py
+        base_output_dir: /gws/nopw/j04/ukesm_nceo/ranjinis/gpp-eval-ml/pi-ctrl/land-only-regional/
+        season: djf
+        region: SAH
+
+  djf_means_tasmax:
+    description: calculate djf means for region
+    variables:
+      tasmax:
+        preprocessor: preproc_extract_region_land_djf
+        project: CMIP6
+        mip: Amon
+    scripts: 
+      djf_means: 
+        script: /home/users/ranjinis/projects/src/github-project-repos/ml-vegetation-response/diag_scripts/name_IPCC_region_files.py
+        base_output_dir: /gws/nopw/j04/ukesm_nceo/ranjinis/gpp-eval-ml/pi-ctrl/land-only-regional/
+        season: djf
+        region: SAH
+
+  djf_means_tasmin:
+    description: calculate djf means for region
+    variables:
+      tasmin:
+        preprocessor: preproc_extract_region_land_djf
+        project: CMIP6
+        mip: Amon
+    scripts: 
+      djf_means: 
+        script: /home/users/ranjinis/projects/src/github-project-repos/ml-vegetation-response/diag_scripts/name_IPCC_region_files.py
+        base_output_dir: /gws/nopw/j04/ukesm_nceo/ranjinis/gpp-eval-ml/pi-ctrl/land-only-regional/
+        season: djf
+        region: SAH
+
+  djf_means_rsds:
+    description: calculate djf means for region
+    variables:
+      rsds:
+        preprocessor: preproc_extract_region_land_djf
+        project: CMIP6
+        mip: Amon
+    scripts: 
+      djf_means: 
+        script: /home/users/ranjinis/projects/src/github-project-repos/ml-vegetation-response/diag_scripts/name_IPCC_region_files.py
+        base_output_dir: /gws/nopw/j04/ukesm_nceo/ranjinis/gpp-eval-ml/pi-ctrl/land-only-regional/
+        season: djf
+        region: SAH
+
+  djf_means_sm:
+    description: calculate djf means for region
+    variables:
+      sm:
+        preprocessor: preproc_extract_region_land_djf
+        project: CMIP6
+        mip: Lmon
+        derive: true
+    scripts: 
+      djf_means: 
+        script: /home/users/ranjinis/projects/src/github-project-repos/ml-vegetation-response/diag_scripts/name_IPCC_region_files.py
+        base_output_dir: /gws/nopw/j04/ukesm_nceo/ranjinis/gpp-eval-ml/pi-ctrl/land-only-regional/
+        season: djf
+        region: SAH
+
+  jja_means_tas:
+    description: calculate jja means for region
+    variables:
+      tas:
+        preprocessor: preproc_extract_region_land_jja
+        project: CMIP6
+        mip: Amon
+    scripts: 
+      jja_means: 
+        script: /home/users/ranjinis/projects/src/github-project-repos/ml-vegetation-response/diag_scripts/name_IPCC_region_files.py
+        base_output_dir: /gws/nopw/j04/ukesm_nceo/ranjinis/gpp-eval-ml/pi-ctrl/land-only-regional/
+        season: jja
+        region: SAH
+
+
+  jja_means_pr:
+    description: calculate jja means for region
+    variables:
+      pr:
+        preprocessor: preproc_extract_region_land_jja
+        project: CMIP6
+        mip: Amon
+    scripts: 
+      jja_means: 
+        script: /home/users/ranjinis/projects/src/github-project-repos/ml-vegetation-response/diag_scripts/name_IPCC_region_files.py
+        base_output_dir: /gws/nopw/j04/ukesm_nceo/ranjinis/gpp-eval-ml/pi-ctrl/land-only-regional/
+        season: jja
+        region: SAH
+
+  jja_means_hurs:
+    description: calculate jja means for region
+    variables:
+      hurs:
+        preprocessor: preproc_extract_region_land_jja
+        project: CMIP6
+        mip: Amon
+    scripts: 
+      jja_means: 
+        script: /home/users/ranjinis/projects/src/github-project-repos/ml-vegetation-response/diag_scripts/name_IPCC_region_files.py
+        base_output_dir: /gws/nopw/j04/ukesm_nceo/ranjinis/gpp-eval-ml/pi-ctrl/land-only-regional/
+        season: jja
+        region: SAH
+
+  jja_means_gpp:
+    description: calculate jja means for region
+    variables:
+      gpp:
+        preprocessor: preproc_extract_region_land_jja
+        project: CMIP6
+        mip: Lmon
+    scripts: 
+      jja_means: 
+        script: /home/users/ranjinis/projects/src/github-project-repos/ml-vegetation-response/diag_scripts/name_IPCC_region_files.py
+        base_output_dir: /gws/nopw/j04/ukesm_nceo/ranjinis/gpp-eval-ml/pi-ctrl/land-only-regional/
+        season: jja
+        region: SAH
+
+  jja_means_tasmax:
+    description: calculate jja means for region
+    variables:
+      tasmax:
+        preprocessor: preproc_extract_region_land_jja
+        project: CMIP6
+        mip: Amon
+    scripts: 
+      jja_means: 
+        script: /home/users/ranjinis/projects/src/github-project-repos/ml-vegetation-response/diag_scripts/name_IPCC_region_files.py
+        base_output_dir: /gws/nopw/j04/ukesm_nceo/ranjinis/gpp-eval-ml/pi-ctrl/land-only-regional/
+        season: jja
+        region: SAH
+
+  jja_means_tasmin:
+    description: calculate jja means for region
+    variables:
+      tasmin:
+        preprocessor: preproc_extract_region_land_jja
+        project: CMIP6
+        mip: Amon
+    scripts: 
+      jja_means: 
+        script: /home/users/ranjinis/projects/src/github-project-repos/ml-vegetation-response/diag_scripts/name_IPCC_region_files.py
+        base_output_dir: /gws/nopw/j04/ukesm_nceo/ranjinis/gpp-eval-ml/pi-ctrl/land-only-regional/
+        season: jja
+        region: SAH
+
+  jja_means_rsds:
+    description: calculate jja means for region
+    variables:
+      rsds:
+        preprocessor: preproc_extract_region_land_jja
+        project: CMIP6
+        mip: Amon
+    scripts: 
+      jja_means: 
+        script: /home/users/ranjinis/projects/src/github-project-repos/ml-vegetation-response/diag_scripts/name_IPCC_region_files.py
+        base_output_dir: /gws/nopw/j04/ukesm_nceo/ranjinis/gpp-eval-ml/pi-ctrl/land-only-regional/
+        season: jja
+        region: SAH
+
+  jja_means_sm:
+    description: calculate jja means for region
+    variables:
+      sm:
+        preprocessor: preproc_extract_region_land_jja
+        project: CMIP6
+        mip: Lmon
+        derive: true
+    scripts: 
+      jja_means: 
+        script: /home/users/ranjinis/projects/src/github-project-repos/ml-vegetation-response/diag_scripts/name_IPCC_region_files.py
+        base_output_dir: /gws/nopw/j04/ukesm_nceo/ranjinis/gpp-eval-ml/pi-ctrl/land-only-regional/
+        season: jja
+        region: SAH
